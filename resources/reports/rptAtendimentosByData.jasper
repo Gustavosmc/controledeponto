@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2016-01-18T01:45:27 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Simple_Blue_2" pageWidth="595" pageHeight="842" columnWidth="483" leftMargin="56" rightMargin="56" topMargin="20" bottomMargin="20" uuid="6d7367b2-11a6-4c7c-938e-d589dab38192">
+	<property name="com.jaspersoft.studio.data.sql.tables" value="IlRJUE9BVEVORElNRU5UTyIgQVMgLDUyLDI5LDU4MWJiMDFmLWQ0MmYtNDJjZC05MzE1LWYwMjQ3&#xA;YTkyMWNkMTsiQ0FEVU5JQ09BVEVORElNRU5UT1MiIEFTICwyNzQsODEsOGY2OWM2NGEtNWU0OS00&#xA;YjAxLTkxMjMtMDA2ZDBiMTAxMGFjOw=="/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="FireBird"/>
+	<parameter name="dtIncial" class="java.sql.Date"/>
+	<parameter name="dtFinal" class="java.sql.Date">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT TIPOSERVICO.SERVICO,
+    ATENDIMENTOS.FKTIPOSERVICO,
+	TIPOSERVICO.ID,
+	ATENDIMENTOS.ID,
+	ATENDIMENTOS.DATAATENDIMENTO
+FROM ATENDIMENTOS
+	INNER JOIN TIPOSERVICO ON 
+	 ATENDIMENTOS.FKTIPOSERVICO = TIPOSERVICO.ID 
+	 where ATENDIMENTOS.DATAATENDIMENTO >= $P{dtIncial}  and ATENDIMENTOS.DATAATENDIMENTO <= $P{dtFinal} 
+	 order by ATENDIMENTOS.DATAATENDIMENTO]]>
+	</queryString>
+	<field name="SERVICO" class="java.lang.String"/>
+	<field name="FKTIPOSERVICO" class="java.lang.Integer"/>
+	<field name="ID" class="java.lang.Integer"/>
+	<field name="COLUMN_4" class="java.lang.Integer"/>
+	<field name="DATAATENDIMENTO" class="java.sql.Date"/>
+	<variable name="Variable_1" class="java.lang.String" resetType="Group" resetGroup="Group2" incrementType="Group" incrementGroup="Group2" calculation="Sum">
+		<variableExpression><![CDATA[$F{SERVICO}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<group name="Group1">
+		<groupExpression><![CDATA[$F{DATAATENDIMENTO}]]></groupExpression>
+		<groupHeader>
+			<band height="21">
+				<textField pattern="dd/MM/yyyy">
+					<reportElement mode="Opaque" x="0" y="0" width="483" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="ea3d025b-4ad0-46eb-8ff1-8baa016c19ec"/>
+					<textElement textAlignment="Center">
+						<font size="15" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{DATAATENDIMENTO}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="20" width="483" height="1" forecolor="#666666" uuid="92477f1c-4800-4795-a532-4840885d533b"/>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="15">
+				<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				<textField>
+					<reportElement x="232" y="0" width="251" height="15" uuid="425b9cfa-7328-448d-9b5d-8c04f643c9e2"/>
+					<textFieldExpression><![CDATA["SubTotal: "+$V{Group1_COUNT}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="Group2">
+		<groupExpression><![CDATA[$F{SERVICO}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band height="15">
+				<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				<textField>
+					<reportElement x="0" y="0" width="277" height="15" uuid="412336bf-4737-4cbd-8ff2-6954a2538fce">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$F{SERVICO}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="277" y="0" width="206" height="15" uuid="0738f59d-abbe-4e14-a8d2-fd905399bf98"/>
+					<textFieldExpression><![CDATA[$V{Group2_COUNT}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="50">
+			<image>
+				<reportElement x="0" y="0" width="483" height="50" uuid="c5ccbaf1-32d4-4be3-aeb5-3156af7d26ab"/>
+				<imageExpression><![CDATA["./Imagens/PrefeituraTop.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="40">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="20" width="200" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="1e64ae79-bae4-4ee3-bfc6-dc62b805f620"/>
+				<textElement textAlignment="Right">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Relatório diário de "]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement mode="Opaque" x="200" y="20" width="73" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="0e0fad85-3207-44fa-9c76-3a3c9a878568">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dtIncial}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement mode="Opaque" x="270" y="20" width="16" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="47046af7-d562-4748-a429-e54f83a35623">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" à "]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement mode="Opaque" x="286" y="20" width="197" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="ce631e93-db4c-48d0-9e49-63f540e98130"/>
+				<textElement textAlignment="Left">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dtFinal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="483" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="cc63294d-568b-436c-b293-6ca72531173a"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DEPARTAMENTO DE ASSISTÊNCIA SOCIAL]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="0" y="20" width="483" height="1" forecolor="#666666" uuid="137b726c-c96f-4e3d-91c3-2159454d6b4e"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="277" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="47194604-37c6-44cd-bda9-aab4ae0d40e8"/>
+				<textElement textAlignment="Left">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Atendimento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="277" y="0" width="206" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="d563d67c-e295-4c84-a93e-2192ad7e3f9f"/>
+				<textElement textAlignment="Left">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Número de Atendimentos]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band>
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="270" y="0" width="90" height="0" uuid="1448e3ec-983b-4b05-a8f0-f8aec450a48a">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$V{Group2_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band>
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="20">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="0" y="0" width="483" height="20" uuid="711904c7-19c4-4224-852e-4a0b9a16cf5f"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Total de "+$V{REPORT_COUNT}+" antedimentos realizados no período"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="63">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="443" height="13" backcolor="#E6E6E6" uuid="ef782cca-fb0f-4ec9-b5aa-1c082f2b02e6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pag. "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="443" y="0" width="40" height="13" backcolor="#E6E6E6" uuid="bdd97464-bcaf-4ba6-a885-f410729c87ec"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="0" width="250" height="13" uuid="08215bf7-ceab-4ace-813b-8af4837686f6"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image hAlign="Center">
+				<reportElement x="0" y="13" width="483" height="50" uuid="94542734-6163-433b-bcd9-46bd43ddcbd6"/>
+				<imageExpression><![CDATA["./Imagens/PrefeituraBotton.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>
